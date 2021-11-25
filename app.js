@@ -1,13 +1,13 @@
-"use strict";
+'use strict';
 
-require("dotenv").config();
-const express = require("express");
+require('dotenv').config();
+const express = require('express');
 const app = express();
 const { PORT } = process.env;
 
-
 const carsRouter = require('./app/routes/cars-routes');
 
-app.use('/api/v1/cars/', carsRouter)
+// GET  api/v1/cars
+app.use('/api/v1/cars/', carsRouter);
 
-app.listen(PORT, () => console.log("Running", PORT));
+app.listen(PORT, () => console.log('Running', PORT));
