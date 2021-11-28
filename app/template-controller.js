@@ -1,6 +1,6 @@
 'use strict';
 
-const createJsonError = require('./errors/create-json-error');
+const createJsonError = require('../'); // completar
 
 // require function DB
 // schema joi
@@ -10,6 +10,7 @@ async function nombreFuncion(req, res) {
     // VALIDACION PARAMETROS ENTRADA
     // LLAMADA BASE DE DATOS
     // VALIDAR RESULTADO
+    res.status(200);
     res.send();
   } catch (error) {
     createJsonError(error, res);
