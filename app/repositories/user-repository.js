@@ -21,7 +21,7 @@ async function createUser(user) {
 async function findUserByEmail(email) {
   const pool = await getPool();
 
-  const sql = 'SELECT id, name, email FROM users WHERE email = ?';
+  const sql = 'SELECT id, name, email, role, password, verifiedAt FROM users WHERE email = ?';
   const [user] = await pool.query(sql, email);
 
   return user[0];
@@ -52,9 +52,18 @@ async function getUserByVerificationCode(code) {
   return user[0];
 }
 
+async function findAllUsers() {
+  const pool = await getPool();
+  const sql = `
+  SELECT id, name, email, role, verifiedAt FROM users`;
+  const [users] = await pool.query(sql);
+  return users;
+}
+
 module.exports = {
   createUser,
   findUserByEmail,
   activateUser,
   getUserByVerificationCode,
+  findAllUsers,
 };
