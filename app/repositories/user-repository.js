@@ -63,10 +63,18 @@ async function findAllUsers() {
 async function findUserById(id) {
   const pool = await getPool();
   const sql = `
-  SELECT name, email, image, createdAt FROM users
+  SELECT name, email, image, role, createdAt FROM users
   WHERE users.id = ?`;
   const [user] = await pool.query(sql, id);
   return user;
+}
+
+async function removeUserById(id) {
+  const pool = await getPool();
+  const sql = `
+  DELETE FROM users WHERE id = ?`;
+  await pool.query(sql, id);
+  return true;
 }
 
 module.exports = {
@@ -76,4 +84,5 @@ module.exports = {
   getUserByVerificationCode,
   findAllUsers,
   findUserById,
+  removeUserById,
 };

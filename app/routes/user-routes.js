@@ -9,6 +9,7 @@ const loginUser = require('../controllers/users/login-users-controller');
 const validateAuth = require('../middlewares/validate-auth-middlewares');
 const getUsers = require('../controllers/users/get-users-controller');
 const getUserProfile = require('../controllers/users/get-userProfile-controller');
+const deleteUserById = require('../controllers/users/delete-userById-controller');
 
 // TODAS LAS URLS SIGUIENTES EMPIEZAN POR /api/v1/users...
 
@@ -20,6 +21,7 @@ router.route('/login').post(loginUser);
 // URL's PRIVADAS [LAS QUE TIENEN .all(validateAuth)]
 
 router.route('/').all(validateAuth).get(getUsers);
+router.route('/:id').all(validateAuth).delete(deleteUserById);
 router.route('/profile').all(validateAuth).get(getUserProfile);
 
 module.exports = router;
