@@ -55,9 +55,18 @@ async function getUserByVerificationCode(code) {
 async function findAllUsers() {
   const pool = await getPool();
   const sql = `
-  SELECT id, name, email, role, verifiedAt FROM users`;
+  SELECT id, name, email, role, password, verifiedAt FROM users`;
   const [users] = await pool.query(sql);
   return users;
+}
+
+async function findUserById(id) {
+  const pool = await getPool();
+  const sql = `
+  SELECT name, email, image, createdAt FROM users
+  WHERE users.id = ?`;
+  const [user] = await pool.query(sql, id);
+  return user;
 }
 
 module.exports = {
@@ -66,4 +75,5 @@ module.exports = {
   activateUser,
   getUserByVerificationCode,
   findAllUsers,
+  findUserById,
 };
