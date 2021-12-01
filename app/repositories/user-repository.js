@@ -66,7 +66,7 @@ async function findUserById(id) {
   SELECT name, email, image, role, createdAt FROM users
   WHERE users.id = ?`;
   const [user] = await pool.query(sql, id);
-  return user;
+  return user[0];
 }
 
 async function removeUserById(id) {
@@ -74,6 +74,13 @@ async function removeUserById(id) {
   const sql = `
   DELETE FROM users WHERE id = ?`;
   await pool.query(sql, id);
+  return true;
+}
+
+async function uploadUserImage(id, image) {
+  const pool = await getPool();
+  const sql = 'UPDATE users SET image = ? WHERE id = ?';
+  await pool.query(sql, [image, id]);
   return true;
 }
 
@@ -85,4 +92,5 @@ module.exports = {
   findAllUsers,
   findUserById,
   removeUserById,
+  uploadUserImage,
 };

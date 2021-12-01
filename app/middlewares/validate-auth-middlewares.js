@@ -16,7 +16,7 @@ function extractAccessToken(headers) {
 
 function validateAuth(req, res, next) {
   try {
-    console.log(req.headers);
+    // console.log(req.headers);
     const { headers } = req;
     const token = extractAccessToken(headers);
     // console.log('token:', token);

@@ -10,6 +10,7 @@ const validateAuth = require('../middlewares/validate-auth-middlewares');
 const getUsers = require('../controllers/users/get-users-controller');
 const getUserProfile = require('../controllers/users/get-userProfile-controller');
 const deleteUserById = require('../controllers/users/delete-userById-controller');
+const uploadImageProfle = require('../controllers/users/upload-imageProfile-controller');
 
 // TODAS LAS URLS SIGUIENTES EMPIEZAN POR /api/v1/users...
 
@@ -23,5 +24,6 @@ router.route('/login').post(loginUser);
 router.route('/').all(validateAuth).get(getUsers);
 router.route('/:id').all(validateAuth).delete(deleteUserById);
 router.route('/profile').all(validateAuth).get(getUserProfile);
+router.route('/upload').all(validateAuth).post(uploadImageProfle);
 
 module.exports = router;

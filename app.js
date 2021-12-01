@@ -4,9 +4,12 @@ require('dotenv').config();
 const cors = require('cors');
 const express = require('express');
 const app = express();
+const fileUpload = require('express-fileupload');
 const { PORT } = process.env;
+app.use(fileUpload());
 // RECIBIR DATOS COMO JSON EN EL BODY
 app.use(express.json());
+// CORS - dar premisos de acceso a otras urls
 app.use(cors());
 app.use(express.static('public'));
 
