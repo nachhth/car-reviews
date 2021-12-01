@@ -19,7 +19,15 @@ async function findReviewsByCarId(idCar) {
   return reviews;
 }
 
+async function getRating(idCar) {
+  const pool = await getPool();
+  const sql = `SELECT AVG(rating) as avgRating, COUNT(rating) as numValoraciones FROM reviews WHERE idCar = ?`;
+  const [reviews] = await pool.query(sql, idCar);
+  return reviews[0];
+}
+
 module.exports = {
   addReview,
   findReviewsByCarId,
+  getRating,
 };
