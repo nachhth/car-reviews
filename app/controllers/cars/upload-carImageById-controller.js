@@ -5,6 +5,7 @@ const createJsonError = require('../../errors/create-json-error');
 const throwJsonError = require('../../errors/throw-jason-error');
 const uploadImage = require('../../helpers/upload-image');
 const { isAdmin } = require('../../helpers/utils');
+const { addImageByCarId } = require('../../repositories/cars-repository');
 
 const schema = joi.number().positive().integer().required();
 
@@ -31,13 +32,18 @@ async function uploadCarImageById(req, res) {
     }
 
     const { PATH_CAR_IMAGE } = process.env;
-    await uploadImage({
+    const processedImage = await uploadImage({
       imageData: imageCar.data,
       destination: `${PATH_CAR_IMAGE}/${carId}`,
       width: 300,
       height: 300,
       codImage: carId,
     });
+
+    await addImageByCarId(carId, processedImage);
+
+    res.status(201);
+    res.send({ image: processedImage });
   } catch (error) {
     createJsonError(error, res);
   }

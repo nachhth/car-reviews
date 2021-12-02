@@ -20,7 +20,19 @@ async function findCarById(id) {
   return car;
 }
 
+async function addImageByCarId(idCar, imageCar) {
+  const pool = await getPool();
+  const sql = `
+  INSERT INTO carImages(
+    name, principal, idCar
+    ) VALUES (?, ?, ?)`;
+  const [cars] = await pool.query(sql, [imageCar, 0, idCar]);
+
+  return true;
+}
+
 module.exports = {
   findAllCars,
   findCarById,
+  addImageByCarId,
 };
