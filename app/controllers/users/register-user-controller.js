@@ -1,5 +1,4 @@
 'use strict';
-const { createUSer, findUserByMail } = require('../../repositories/user-repository');
 
 const joi = require('joi');
 const bcrypt = require('bcryptjs');
