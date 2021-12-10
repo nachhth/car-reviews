@@ -40,7 +40,7 @@ async function loginUser(req, res) {
 
     const { JWT_SECRET } = process.env;
 
-    const tokenPayload = { id, name, role, ejemplo: 'asdf' };
+    const tokenPayload = { id, name, role, ejemplo: 'asdf' }; // el ejemplo es porque puedo añadir lo que yo quiera
     const token = jwt.sign(tokenPayload, JWT_SECRET, {
       expiresIn: '20min',
     });
